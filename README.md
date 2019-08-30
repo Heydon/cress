@@ -4,7 +4,7 @@
 
 **Cress** is intended as a smaller, more versatile, and less complex alternative to other CSS-in-JS solutions. It encourages separating styling from markup and behavior, while retaining a component-like organizational philosophy. 
 
-Where SSR (Server-side Rendering) is applied, the basic scoped styling behaviour it offers works in IE7+.
+Where SSR (Server-side Rendering) is applied, the basic componentized/scoped styling behaviour it offers works in IE7+.
 
 * [Features](#features)
 * [The `this` keyword... in CSS??](#the-this-keyword-in-CSS)
