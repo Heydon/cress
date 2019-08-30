@@ -26,7 +26,8 @@
     "url": "https://github.com/Heydon/cress/issues"
   },
   "homepage": "https://github.com/Heydon/cress#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "husky": "^3.0.4",
     "uglify-es": "^3.3.9"
   }
