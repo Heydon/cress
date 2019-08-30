@@ -38,7 +38,7 @@ this button {
 In the constructor, ”this” is replaced globally by a special identifier, and that's how styles are scoped:
 
 ```css
-[data-Cress="wi5xdkbb9"] button {
+[data-cress="wi5xdkbb9"] button {
   color: red;
 }
 ```
@@ -64,9 +64,9 @@ new Cress('.test', {
 
 The neat thing is that every element matching `.test` will now share an embedded stylesheet identified by `wi5xdkbb9-red`. The `wi5xdkbb9` part is shared by _all_ `.test` elements, and the `red` part is shared by all `.test` elements _where the `color` prop is `red`_. This saves on redundancy.
 
-Now... if you apply the `data-Cress-color="blue"` attribution to one or more of your `.test` elements, their identifier will become `wi5xdkbb9-blue` and a new stylesheet will be created to serve them differently. 
+Now... if you apply the `data-cress-color="blue"` attribution to one or more of your `.test` elements, their identifier will become `wi5xdkbb9-blue` and a new stylesheet will be created to serve them differently. 
 
-Every default prop can be overridden with an attribute of the pattern `data-Cress-[name of prop]`. You don't need to use props (you may just want the scoping feature) but they're v nice. 
+Every default prop can be overridden with an attribute of the pattern `data-cress-[name of prop]`. You don't need to use props (you may just want the scoping feature) but they're v nice. 
 
 ## Reactivization
 
@@ -224,7 +224,7 @@ css(props) {
 
 ## `props` (`Object`)
 
-See [**Props**](#props). This object defines the _default_ values for each of your props. These values are overridden by providing attributes following the pattern `data-Cress-[prop name]`. So, for example, my `props` object might initialize the `width` property:
+See [**Props**](#props). This object defines the _default_ values for each of your props. These values are overridden by providing attributes following the pattern `data-cress-[prop name]`. So, for example, my `props` object might initialize the `width` property:
 
 ```js
 props: {
@@ -232,7 +232,7 @@ props: {
 }
 ```
 
-To override the `50%` value with `30%`, I'd have to attribute my component instance with `data-Cress-width="30%"`. It would be perfectly acceptable to use a `calc()` function instead: `data-Cress-width="calc(30% + 1rem)"`. It's just CSS, captured in a string, in an attribute value.
+To override the `50%` value with `30%`, I'd have to attribute my component instance with `data-cress-width="30%"`. It would be perfectly acceptable to use a `calc()` function instead: `data-cress-width="calc(30% + 1rem)"`. It's just CSS, captured in a string, in an attribute value.
 
 The component's `MutationObserver` only observes changes to attributes listed in the `props` object.
 
