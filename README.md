@@ -1,6 +1,6 @@
 # Cress
 
-**Cress** stands for **Componentized Reactive ...Erm... Scoped Stylesheets**. Think of **Cress** components as web components just for styling, except without having to use the web components specs.
+**Cress** stands for **Componentized Reactive ...Erm... Scoped Stylesheets**. Think of **Cress** components as sort of like web components just for styling, except without having to use the web components specs.
 
 **Cress** is intended as a smaller, more versatile, and less complex alternative to other CSS-in-JS solutions. It encourages separating styling from markup and behavior, while retaining a component-like organizational philosophy. 
 
