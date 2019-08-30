@@ -33,7 +33,7 @@ this button {
 In the constructor ”this” is replaced globally by a special identifier, and that's how styles are scoped:
 
 ```css
-[data-i="cress-wi5xdkbb9"] button {
+[data-cress="wi5xdkbb9"] button {
   color: red;
 }
 ```
@@ -57,11 +57,11 @@ new Cress('.test', {
 });
 ```
 
-The neat thing is that every element matching `.test` will now share an embedded stylesheet identified by `cress-wi5xdkbb9-red`. The `wi5xdkbb9` part is shared by _all_ `.test` elements, and the `red` part is shared by all `.test` elements _where the `color` prop is `red`_. This saves on redundancy.
+The neat thing is that every element matching `.test` will now share an embedded stylesheet identified by `wi5xdkbb9-red`. The `wi5xdkbb9` part is shared by _all_ `.test` elements, and the `red` part is shared by all `.test` elements _where the `color` prop is `red`_. This saves on redundancy.
 
-Now... if you apply the `data-color="blue"` attribution to one or more of your `.test` elements, their identifier will become `cress-wi5xdkbb9-blue` and a new stylesheet will be created to serve them differently. 
+Now... if you apply the `data-cress-color="blue"` attribution to one or more of your `.test` elements, their identifier will become `wi5xdkbb9-blue` and a new stylesheet will be created to serve them differently. 
 
-Every default prop can be overridden with an attribute of the pattern `data-[name of prop]`. You don't need to use props (you may just want the scoping feature) but they're v nice. 
+Every default prop can be overridden with an attribute of the pattern `data-cress-[name of prop]`. You don't need to use props (you may just want the scoping feature) but they're v nice. 
 
 ## Reactivization
 
@@ -162,7 +162,7 @@ new Cress('.my-selector', {
 });
 ```
 
-Of course, you can organize your **CRESS** components into their own module files if you want. This is what `MySelector.js` might look like:
+Of course, you can organize your **CRESS** components into their own module files if you want. This is what `MyComponent.js` might look like:
 
 ```js
 import { Cress } from './path/to/Cress.js';
