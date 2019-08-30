@@ -1,12 +1,15 @@
 # CRESS
 
-**CRESS** stands for **Componentized Reactive ...Erm... Scoped Stylesheets**. Think of **CRESS** components as web components for styling, except without having to use the web components specs.
+**CRESS** stands for **Componentized Reactive ...Erm... Scoped Stylesheets**. Think of **CRESS** components as web components just for styling, except without having to use the web components specs.
+
+**CRESS** is intended as a smaller, more versatile, and less complex alternative to other CSS-in-JS solutions. It encourages separating styling from markup and behavior while retaining a component-like organizational philosophy. 
 
 * [Features](#features)
 * [The `this` keyword... in CSS??](#the-this-keyword-in-CSS)
 * [Props](#props)
 * [Reactivization](#reactivization)
 * [Container queries too??](#container-queries-too)
+* [SSR](#ssr)
 * [What about Shadow DOM? Isn't that what everyone wants?](#what-about-shadow-dom-isnt-that-what-everyone-wants)
 * [Config API](#config-api)
 
@@ -14,15 +17,15 @@
 
 * Completely dependency free
 * Completely framework independent
-* <1KB minified ES module
+* 1KB minified ES module
 * Automatic scoping
 * SSR (Server-side Rendering) is easy
 * Reactive to prop changes using `MutationObserver`
-* `resize` method provided harnessing `ResizeObserver`
+* `resize` method harnessing `ResizeObserver`
 
 ## The `this` keyword... in CSS??
 
-Well, no, not really. The word ”this” in a string that looks like CSS is more like it. But it helps solve the scoping issue without having to worry about the CSS OM or having to use some sort of complex regular expression. Instead, you just write 'this' (or a different word you've chosen; it's configurable) wherever you need to represent the target/parent element in the selector.
+Well, no, not really. The word ”this” in a string that looks like CSS is more like it. But it helps solve the scoping issue without having to worry about the CSS OM or having to use some sort of complex regular expression. Instead, you just write ”this” (or a different word you've chosen; it's configurable) wherever you need to represent the target/parent element in the selector.
 
 ```css
 this button {
@@ -30,7 +33,7 @@ this button {
 }
 ```
 
-In the constructor ”this” is replaced globally by a special identifier, and that's how styles are scoped:
+In the constructor, ”this” is replaced globally by a special identifier, and that's how styles are scoped:
 
 ```css
 [data-cress="wi5xdkbb9"] button {
@@ -71,7 +74,7 @@ A `MutationObserver` is applied to each of the `.test` elements, so when a prop-
 
 ## Container queries too??
 
-**CRESS** components are initialized with two arguments: a CSS selector, and a config object. As well as the default `props` object and the `css()` method, you can add and adjust some other things too. The `resize()` method lets you do stuff when the (parent) element (the element that matches the selector) is resized. This allows you to create container queries!
+**CRESS** components are initialized with two arguments: a CSS selector, and a config object. As well as the default `props` object and the `css()` method, you can add and adjust some other things too. The `resize()` method lets you do stuff when a (parent) element (the element that matches the selector) is resized. This allows you to create container queries!
 
 Consider the following example:
 
@@ -105,11 +108,30 @@ Now, wherever `.test` elements are narrower than `400px`, they will adopt the `.
 
 `ResizeObserver` is [not the most well supported observer](https://caniuse.com/#search=resizeObserver) (although it has recently come to Firefox), so it's recommended `resize()` stuff is limited to progressive enhancements only, for production sites, for now.
 
+## SSR
+
+Fundamentally, **CRESS** just embeds some [automatically scoped](#the-this-keyword-in-CSS) CSS. It doesn't need any kind of JavaScript to run in the browser if SSR (Server-side Rendering) has already populated the `<head>` with those styles. Why should basic CSS depend on JavaScript??
+
+Your SSR approach is up to you. I like JSDOM; you might use Chromium and Puppeteer. In any case, all that needs to happen is for the **CRESS** constructors to run and the HTML string to be augmented at build time. With the static site generator Eleventy, I can use a `transform` function that post-processes the HTML. The `runScripts` option is the key; it's what runs the **CRESS** code and embeds the styles.
+
+```js
+eleventyConfig.addTransform('ssr', function(page) {
+  let dom = new JSDOM(page, {
+    resources: 'usable',
+    runScripts: 'dangerously'
+  });
+  let document = dom.window.document;
+  return '<!DOCTYPE html>\r\n' + document.documentElement.outerHTML;
+});
+```
+
+Yes, **CRESS** components are [reactive](#reactivization) and can incorporate JavaScript-enabled [container queries](#container-queries-too), but these features should be considered progressive enhancements. Server-side rendered **CRESS** components rely on nothing more than `<style>` elements and attribute selectors (IE7+) in the browser.
+
 ## What about Shadow DOM? Isn't that what everyone wants?
 
 Nah. Everyone thinks Shadow DOM will mean styles are completely sandboxed, like you're using an `<iframe>`. But they're not, which is cack. Plus they don't accept universal styles (set using `*`) when you _want_ them to.
 
-The identifiers used in **CRESS** components handle styles not leaking _out_ to other elements (think [Vue's implementation](https://vue-loader.vuejs.org/guide/scoped-css.html)). To stop styles leaking _in_, you have the option of _reseting_ them with the `reset` config option:
+The identifiers used in **CRESS** components handle styles not leaking _out_ to other elements (think [Vue's implementation](https://vue-loader.vuejs.org/guide/scoped-css.html)). To stop styles leaking _in_, you have the option of resetting them with the `reset` config option:
 
 ```js
 new Cress('.test', {
@@ -182,7 +204,7 @@ export { MyComponent };
 
 ## Config API
 
-The second argument to each constructor call in the config object. 
+The second argument to each constructor call in the config object. Following are all the currently supported properties.
 
 ### `css()` (`Function`; required)
 
@@ -252,6 +274,6 @@ To remove all styles that would be inherited or otherwise applied to nodes and t
 reset: true
 ```
 
-As described in [**What about Shadow DOM? Isn't that what everyone wants?**](#what-about-shadow-dom-isnt-that-what-everyone-wants), this applies `all: initial` to the main/parent node and all the descendant is contains. The CSS you write using your [`css` method](#css-function-required) is then based on a clean slate. 
+As described in [**What about Shadow DOM? Isn't that what everyone wants?**](#what-about-shadow-dom-isnt-that-what-everyone-wants), this applies `all: initial` to the main/parent node and all the descendant is contains. The CSS you write using your [`css` method](#css-function-required) is then applied to a clean slate. 
 
 
