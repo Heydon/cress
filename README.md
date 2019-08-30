@@ -198,6 +198,20 @@ css(props) {
 }
 ```
 
+## `props` (`Object`)
+
+See [**Props**](#props). This object defines the _default_ values for each of your props. These values are overridden by providing attributes following the pattern `data-cress-[prop name]`. So, for example, my `props` object might initialize the `width` property:
+
+```js
+props: {
+  width: '50%'
+}
+```
+
+To override the `50%` value with `30%`, I'd have to attribute my component instance with `data-cress-width="30%"`. It would be perfectly acceptable to use a `calc()` function instead: `data-cress-width="calc(30% + 1rem)"`. It's just CSS, captured in a string, in an attribute value.
+
+The component's `MutationObserver` only observes changes to attributes listed in the `props` object.
+
 ## `this` (`String`)
 
 By default, the word ”this” represents the current element/parent. You may wish to use a different identifier; perhaps one that is less likely to appear elsewhere in your CSS. You could just use a character you're sure your CSS won't use:
