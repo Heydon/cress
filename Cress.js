@@ -1,6 +1,6 @@
 /**
- * Constructor for creating CRESS stylesheet components
- * @param {String} selector The selector to match nodes that will become instances of the CRESS component
+ * Constructor for creating Cress stylesheet components
+ * @param {String} selector The selector to match nodes that will become instances of the Cress component
  * @param {Object} config The configuration object. See [the README on Github]{@link https://github.com/Heydon/cress/blob/master/README.md}
  * @class
  */
