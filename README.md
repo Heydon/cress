@@ -276,6 +276,6 @@ To remove all styles that would be inherited or otherwise applied to nodes and t
 reset: true
 ```
 
-As described in [**What about Shadow DOM? Isn't that what everyone wants?**](#what-about-shadow-dom-isnt-that-what-everyone-wants), this applies `all: initial` to the main/parent node and all the descendant is contains. The CSS you write using your [`css` method](#css-function-required) is then applied to a clean slate. 
+As described in [**What about Shadow DOM? Isn't that what everyone wants?**](#what-about-shadow-dom-isnt-that-what-everyone-wants), this applies `all: initial` to the main/parent node and all the descendants it contains. The CSS you write using your [`css` method](#css-function-required) is then applied over a clean slate. 
 
 
