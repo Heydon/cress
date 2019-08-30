@@ -7,6 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "uglify": "uglifyjs Cress.js -o Cress.min.js -c -m"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run uglify"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Heydon/cress.git"
