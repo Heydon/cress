@@ -212,9 +212,9 @@ To override the `50%` value with `30%`, I'd have to attribute my component insta
 
 The component's `MutationObserver` only observes changes to attributes listed in the `props` object.
 
-## `this` (`String`)
+### `this` (`String`)
 
-By default, the word ”this” represents the current element/parent. You may wish to use a different identifier; perhaps one that is less likely to appear elsewhere in your CSS. You could just use a character you're sure your CSS won't use:
+By default, the word ”this” represents the current element/parent. You may wish to use a different identifier; perhaps one that is less likely to appear elsewhere in your CSS. You could just use a character you're sure your CSS won't contain:
 
 ```js
 this: '±'
@@ -252,6 +252,6 @@ To remove all styles that would be inherited or otherwise applied to nodes and t
 reset: true
 ```
 
-As described in [**What about Shadow DOM? Isn't that what everyone wants?**](#what-about-shadow-dom-isnt-that-what-everyone-wants), this uses `all: initial`.
+As described in [**What about Shadow DOM? Isn't that what everyone wants?**](#what-about-shadow-dom-isnt-that-what-everyone-wants), this applies `all: initial` to the main/parent node and all the descendant is contains. The CSS you write using your [`css` method](#css-function-required) is then based on a clean slate. 
 
 
