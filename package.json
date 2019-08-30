@@ -1,0 +1,28 @@
+{
+  "name": "cress",
+  "version": "0.0.1",
+  "description": "Dependency free, framework independent, scoped stylesheet components",
+  "main": "Cress.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "uglify": "uglifyjs Cress.js -o Cress.min.js -c -m"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heydon/cress.git"
+  },
+  "keywords": [
+    "css",
+    "css-in-js"
+  ],
+  "author": "Heydon Pickering <heydon@heydonworks.com> (http://www.heydonworks.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Heydon/cress/issues"
+  },
+  "homepage": "https://github.com/Heydon/cress#readme",
+  "dependencies": {
+    "husky": "^3.0.4",
+    "uglify-es": "^3.3.9"
+  }
+}
