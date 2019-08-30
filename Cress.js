@@ -17,7 +17,7 @@ function Cress(selector, config) {
     }
     let props = {};
     for (let prop in config.props) {
-      let attr = elem.getAttribute(`data-${prop}`);
+      let attr = elem.getAttribute(`data-cress-${prop}`);
       props[prop] = attr ? attr : config.props[prop];
     }
     return props;
