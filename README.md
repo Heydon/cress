@@ -6,6 +6,8 @@
 
 Where SSR (Server-side Rendering) is applied, the basic componentized/scoped styling behaviour it offers works in IE7+.
 
+**WARNING: This is very experimental, and in the early stages of development**
+
 * [Features](#features)
 * [The `this` keyword... in CSS??](#the-this-keyword-in-CSS)
 * [Props](#props)
